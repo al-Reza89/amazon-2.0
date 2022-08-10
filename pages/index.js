@@ -6,7 +6,7 @@ import styles from "../styles/Home.module.css";
 
 export default function Home() {
   return (
-    <div>
+    <div className="bg-gray-100 ">
       <Head>
         <title>Amazon 2.0</title>
       </Head>

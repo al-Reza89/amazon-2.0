@@ -5,6 +5,7 @@ import { Carousel } from "react-responsive-carousel";
 const Banner = () => {
   return (
     <div className="relative ">
+      <div className="absolute w-full h-32 bg-gradient-to-t from-gray-100 to-transparent bottom-0 z-20 " />
       <Carousel
         autoPlay
         infiniteLoop
@@ -13,7 +14,6 @@ const Banner = () => {
         showThumbs={false}
         interval={5000}
       >
-        {/* just need n div to work */}
         <div>
           <img loading="lazy" src="https://links.papareact.com/gi1" alt="" />
         </div>
