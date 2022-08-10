@@ -1,7 +1,6 @@
 import Product from "./Product";
 
 const ProductFeed = ({ products }) => {
-  console.log(products);
   return (
     <div>
       <h1>Product page</h1>
