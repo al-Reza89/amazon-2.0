@@ -3,7 +3,6 @@ import Product from "./Product";
 const ProductFeed = ({ products }) => {
   return (
     <div>
-      <h1>Product page</h1>
       {products.map(({ id, title, price, description, category, image }) => (
         <Product
           key={id}
