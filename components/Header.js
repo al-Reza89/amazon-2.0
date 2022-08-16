@@ -6,10 +6,16 @@ import {
 } from "@heroicons/react/outline";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { selectItems } from "../slices/basketSlice";
 
 const Header = () => {
   const { data: session } = useSession();
   const router = useRouter();
+
+  // pull the item from header using selector
+  // and it will select from selected item which is our basket in basketSlice
+  const items = useSelector(selectItems);
 
   // console.log(session);
 
@@ -56,7 +62,7 @@ const Header = () => {
             className=" relative link flex items-center "
           >
             <span className=" absolute top-0 right-0 md:right-10 h-4 w-4 bg-yellow-400 text-center rounded-full text-black font-bold ">
-              0
+              {items.length}
             </span>
 
             <ShoppingCartIcon className=" h-10  " />
