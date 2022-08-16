@@ -39,20 +39,10 @@ const Header = () => {
         {/* right */}
 
         <div className=" text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap ">
-          <div onClick={signIn} className="link ">
+          <div onClick={!session ? signIn : signOut} className="link ">
             <p>{session ? `Hello , ${session.user.name}` : "Sing In"}</p>
             <p className="  font-extrabold md:text-sm ">Account & Lists </p>
           </div>
-          {session && (
-            <div onClick={signOut} className="link text-white ">
-              <button
-                onClick={signOut}
-                className=" link font-extrabold border-4 "
-              >
-                Sign Out
-              </button>
-            </div>
-          )}
 
           <div className="link ">
             <p>Returns</p>
