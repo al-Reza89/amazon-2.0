@@ -8,10 +8,11 @@ import Currency from "react-currency-formatter";
 import { useSession } from "next-auth/react";
 
 const Checkout = () => {
-  const { session } = useSession();
+  const { data: session } = useSession();
   const items = useSelector(selectItems);
   const total = useSelector(selectTotal);
-  console.log(items);
+  //   console.log(items);
+  console.log(session);
 
   return (
     <div className="bg-gray-100">
