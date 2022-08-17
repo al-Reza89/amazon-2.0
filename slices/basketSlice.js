@@ -41,5 +41,9 @@ export const { addToBasket, removeFromBasket } = basketSlice.actions;
 
 // selector help us to fetch the data from the basket
 export const selectItems = (state) => state.basket.items;
+// for total
+// reduce gives two things variable total and item which i loop through and initial total=0
+export const selectTotal = (state) =>
+  state.basket.items.reduce((total, item) => total + item.price, 0);
 
 export default basketSlice.reducer;
