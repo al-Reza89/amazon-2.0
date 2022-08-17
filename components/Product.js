@@ -17,7 +17,16 @@ const Product = ({ id, title, price, description, category, image }) => {
   const [hasPrime] = useState(Math.random() < 0.5);
 
   const addItemToBasket = () => {
-    const Product = { id, title, price, description, category, image };
+    const Product = {
+      id,
+      title,
+      price,
+      description,
+      category,
+      image,
+      rating,
+      hasPrime,
+    };
 
     // pass the product information to the addToBasket function
     // we dispatch here and action.payload will catch this product and store it
