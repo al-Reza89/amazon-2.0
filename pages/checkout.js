@@ -6,13 +6,43 @@ import { useSelector } from "react-redux";
 import CheckoutProduct from "../components/CheckoutProduct";
 import Currency from "react-currency-formatter";
 import { useSession } from "next-auth/react";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(process.env.stripe_public_key);
 
 const Checkout = () => {
   const { data: session } = useSession();
   const items = useSelector(selectItems);
   const total = useSelector(selectTotal);
   //   console.log(items);
-  console.log(session);
+  // console.log(session);
+
+  const createCheckoutSession = async () => {
+    const stripe = await stripePromise;
+
+    // call the backend to create checkout session...and backend will send response if it is successful then frontend will redirect another page
+
+    const checkoutSession = await axios.post("/api/createCheckoutSession", {
+      items: items,
+      email: session.user.email,
+    });
+
+    await console.log({ checkoutSession: checkoutSession });
+
+    // Redirect User or customer to Stripe checkout
+    const result = await stripe.redirectToCheckout({
+      // chackout will give us this response
+      sessionId: checkoutSession.data.id,
+    });
+
+    await console.log({ result: result });
+
+    if (result.error) {
+      alert(result.error.message);
+    }
+  };
 
   return (
     <div className="bg-gray-100">
@@ -52,6 +82,8 @@ const Checkout = () => {
                 </span>
               </h2>
               <button
+                onClick={createCheckoutSession}
+                role="link"
                 disabled={!session}
                 className={`button mt-2 ${
                   !session &&
